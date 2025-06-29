@@ -2,25 +2,21 @@
 
 name: print-name
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    inputs:
+      name: 
+        description: "display name"
+        required: true
+        default: "venkat"
+        type: "choice"
+        options:
+          - "krishnan"
+          - "sparrow"
+        
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: self-hosted
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: display message
+        run: echo "Hello ${{ github.event.inputs.name }}"
